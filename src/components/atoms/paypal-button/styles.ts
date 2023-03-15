@@ -6,16 +6,6 @@ interface IPaypalButton {
   disabled?: boolean
 }
 
-export const PaypalButton = styled.div<IPaypalButton>`
-  min-width: 150px;
-  min-height: 25px;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  position: relative;
-
-  max-width: 750px;
-`
-
 export const PaypalButtonOverlay = styled.div<IPaypalButton>`
   /* Don't remove this */
   position: absolute;
@@ -37,5 +27,22 @@ export const PaypalButtonOverlay = styled.div<IPaypalButton>`
 
   border-radius: 10px;
 
-  /* opacity: 0.5; */
+  transition: 0.3s ease all;
+`
+
+export const PaypalButton = styled.div<IPaypalButton>`
+  min-width: 150px;
+  min-height: 25px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  position: relative;
+
+  max-width: 750px;
+
+  /* workarround to work hover in Overlay, as it has pointer-events: none property */
+  &:hover {
+    ${PaypalButtonOverlay} {
+      background-color: #0d9e0d;
+    }
+  }
 `
