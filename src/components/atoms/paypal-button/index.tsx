@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import { IProduct } from '~/interfaces/product'
 
 interface IPaypalButton {
-  width?: number
-  height?: number
+  width?: string
+  height?: string
 
   text?: string
   disabled?: boolean | undefined
@@ -21,8 +21,8 @@ interface IPaypalButton {
 }
 
 export default function PaypalButton({
-  width = 150,
-  height = 40,
+  width = '150px', // it can be 100% too
+  height = '40px',
   text,
   disabled,
   product,
@@ -61,7 +61,7 @@ export default function PaypalButton({
                   color: 'black',
                   shape: 'pill',
                   tagline: false,
-                  height: height,
+                  height: Number(height.replace(/\D/g, '')),
                 }}
                 disabled={disabled}
                 onError={(err) => {
