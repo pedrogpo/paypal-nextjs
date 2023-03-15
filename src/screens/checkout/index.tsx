@@ -8,7 +8,7 @@ export default function Checkout() {
         text="Comprar"
         product={{
           name: 'Teste',
-          price: '10.00',
+          price: '15.00',
           id: 1,
           description: 'Teste',
         }}
