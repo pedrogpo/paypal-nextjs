@@ -6,7 +6,8 @@ const nextConfig = {
     styledComponents: true,
   },
   env: {
-    PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
+    SANDBOX_PAYPAL_CLIENT_ID: process.env.SANDBOX_PAYPAL_CLIENT_ID,
+    PRODUCTION_PAYPAL_CLIENT_ID: process.env.PRODUCTION_PAYPAL_CLIENT_ID,
   },
 }
 

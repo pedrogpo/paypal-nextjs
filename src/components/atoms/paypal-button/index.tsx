@@ -7,7 +7,7 @@ interface IPaypalButton {
   width?: number
   height?: number
 
-  text: string
+  text?: string
   disabled?: boolean | undefined
 
   product: IProduct
@@ -119,7 +119,9 @@ export default function PaypalButton({
               />
             )}
             {/* TODO: check if button is disabled and do something... */}
-            <S.PaypalButtonOverlay disabled={disabled}>{text}</S.PaypalButtonOverlay>
+            {text && (
+              <S.PaypalButtonOverlay disabled={disabled}>{text}</S.PaypalButtonOverlay>
+            )}
           </>
         )
       }
