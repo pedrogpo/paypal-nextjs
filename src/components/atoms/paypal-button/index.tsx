@@ -1,6 +1,5 @@
 import * as S from './styles'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
-import { useState } from 'react'
 import { IPaypalButton } from './interfaces'
 
 export default function PaypalButton({
