@@ -3,7 +3,7 @@
 This is a custom Paypal button component for front-end integration. It provides customizations, styles and improved readability for a better user experience.
 This component is built with Next.JS and Typescript.
 
-##Installation
+## Installation
 
 - Clone the repository
 - Run npm/yarn install to install the dependencies
@@ -16,7 +16,7 @@ SANDBOX_PAYPAL_CLIENT_ID=your_sandbox_client_id_here
 PRODUCTION_PAYPAL_CLIENT_ID=your_production_client_id_here
 ```
 
-##Usage
+## Usage
 This is an example of how to use the PaypalButton component:
 
 ```tsx
