@@ -63,10 +63,10 @@ export default function Checkout() {
 | Name | Type | Description |
 |------|------|-------------|
 |`disabled`|`boolean \| undefined`| Whether the button should be disabled. |
-|`onApprove`|`((data: OnApproveData, actions: OnApproveActions) => Promise<void>) | undefined`| A function that is called when the buyer approves the transaction. |
-|`onError`|`((err: Record<string, unknown>) => void) | undefined`| A function that is called when there is an error. |
-|`onCancel`|`((data: Record<string, unknown>, actions: OnCancelledActions) => void) | undefined`| A function that is called when the buyer cancels the transaction. |
-|`createOrder`|`((data: CreateOrderData, actions: CreateOrderActions) => Promise<IPaypalButtonOrderInfo> | undefined)`| A function that is called to create the order. |
+|`onApprove`|`((data: OnApproveData, actions: OnApproveActions) => Promise<void>) \| undefined`| A function that is called when the buyer approves the transaction. |
+|`onError`|`((err: Record<string, unknown>) => void) \| undefined`| A function that is called when there is an error. |
+|`onCancel`|`((data: Record<string, unknown>, actions: OnCancelledActions) => void) \| undefined`| A function that is called when the buyer cancels the transaction. |
+|`createOrder`|`((data: CreateOrderData, actions: CreateOrderActions) => Promise<IPaypalButtonOrderInfo> \| undefined)`| A function that is called to create the order. |
 |`style`|`IPaypalButtonStyle`| The style properties for the Paypal button. |
 |`IPaypalButtonStyle.width`|`string`| The width of the button. |
 |`IPaypalButtonStyle.height`|`string`| The height of the button. |
