@@ -28,7 +28,7 @@ export default function Checkout() {
   return (
     <S.Checkout>
       <PaypalButton
-        {/* if you leave the text prop blank, it will use the default style of the Paypal Button */}
+        // if you leave the text prop blank, it will use the default style of the Paypal Button
         style={{
           text: 'Purchase',
           loadingComponent: <Loader />,
