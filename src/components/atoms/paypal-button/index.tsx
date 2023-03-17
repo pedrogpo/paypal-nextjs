@@ -9,15 +9,8 @@ export default function PaypalButton({
     loadingComponent = <>Loading...</>,
     text,
   } = {},
-  orderInfo: {
-    currency = 'BRL',
-    custom_id,
-    reference_id,
-    invoice_id,
-    soft_descriptor,
-  } = {},
+  orderInfo,
   disabled,
-  product,
   onApprove,
   onError,
   onCancel,
@@ -54,42 +47,46 @@ export default function PaypalButton({
                     Fazer uma request para registrar o create order e retornar um 
                     id único de pagamento para utilizar como invoice_id, referencia etc...
                   */
-                  const purchase_units = [
-                    {
-                      /*
-                        reference_id: ...
-                          A reference_id não precisa ser estática, ela pode ser gerada dinamicamente para cada pagamento.
-                          A reference_id é um campo opcional que você pode usar para identificar a transação.
-                          Se você precisar associar o pagamento a um pedido, por exemplo, você pode gerar uma reference_id única 
-                          para cada pedido. Isso pode ser útil para fins de rastreamento e reconciliação.
-                        */
-                      /*
-                        invoice_id: ...
-                          Um identificador exclusivo para a transação, que pode ser usado para rastrear o pagamento em seus registros.
-
-                        custom_id: ...
-                          Um identificador exclusivo que você pode usar para associar a transação a informações adicionais em seus registros.
-                      
-                        soft_descriptor: ...
-                          Uma descrição curta que aparece na fatura do comprador para identificar a fonte do pagamento.
-                        */
-                      description: product.description,
-                      amount: {
-                        value: product.price,
-                        currency_code: currency,
-                      },
-                      custom_id: custom_id,
-                      reference_id: reference_id,
-                      invoice_id: invoice_id,
-                      soft_descriptor: soft_descriptor,
-                    },
-                  ]
 
                   try {
                     const result = createOrder && (await createOrder(data, actions))
-                    if (!result) {
+
+                    if (createOrder && !result) {
                       throw new Error('it was not possible to create the order.')
                     }
+
+                    const info = result || orderInfo
+
+                    const purchase_units = [
+                      {
+                        /*
+                          reference_id: ...
+                            A reference_id não precisa ser estática, ela pode ser gerada dinamicamente para cada pagamento.
+                            A reference_id é um campo opcional que você pode usar para identificar a transação.
+                            Se você precisar associar o pagamento a um pedido, por exemplo, você pode gerar uma reference_id única 
+                            para cada pedido. Isso pode ser útil para fins de rastreamento e reconciliação.
+                          */
+                        /*
+                          invoice_id: ...
+                            Um identificador exclusivo para a transação, que pode ser usado para rastrear o pagamento em seus registros.
+  
+                          custom_id: ...
+                            Um identificador exclusivo que você pode usar para associar a transação a informações adicionais em seus registros.
+                        
+                          soft_descriptor: ...
+                            Uma descrição curta que aparece na fatura do comprador para identificar a fonte do pagamento.
+                          */
+                        description: info.product.description,
+                        amount: {
+                          value: info.product.price,
+                          currency_code: info.currency,
+                        },
+                        custom_id: info.custom_id,
+                        reference_id: info.reference_id,
+                        invoice_id: info.invoice_id,
+                        soft_descriptor: info.soft_descriptor,
+                      },
+                    ]
 
                     return actions.order.create({ purchase_units })
                   } catch (error) {

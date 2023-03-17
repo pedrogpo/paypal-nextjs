@@ -8,16 +8,21 @@ export default function Checkout() {
         style={{
           text: 'Comprar',
         }}
-        product={{
-          name: 'Teste',
-          price: '15.00',
-          id: 1,
-          description: 'Teste',
+        orderInfo={{
+          product: {
+            description: 'poo',
+            price: '15.00',
+          },
         }}
-        orderInfo={{}}
-        createOrder={(data, actions) => {
-          return Promise.resolve(false)
-        }}
+        // createOrder={(data, actions) => {
+        //   // here can be a fetch to an api to create the order...
+        //   return Promise.resolve({
+        //     product: {
+        //       description: 'poo',
+        //       price: '18.00',
+        //     },
+        //   })
+        // }}
       />
     </S.Checkout>
   )
