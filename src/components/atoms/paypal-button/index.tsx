@@ -9,7 +9,6 @@ export default function PaypalButton({
     loadingComponent = <>Loading...</>,
     text,
   } = {},
-  orderInfo,
   disabled,
   onApprove,
   onError,
@@ -19,7 +18,7 @@ export default function PaypalButton({
   const [{ isPending }] = usePayPalScriptReducer()
 
   return (
-    <S.PaypalButton width={width} height={height}>
+    <S.PaypalButton disabled={disabled} width={width} height={height}>
       {
         // This is a workaround to hide the PayPal button
         // when it's not ready yet
@@ -29,7 +28,6 @@ export default function PaypalButton({
           <>
             {!disabled && (
               <PayPalButtons
-                className="paypal__container"
                 style={{
                   layout: 'horizontal',
                   color: 'black',
@@ -38,53 +36,28 @@ export default function PaypalButton({
                   height: Number(height.replace(/\D/g, '')),
                 }}
                 disabled={disabled}
-                // usar o onApprove com cuidado se o IPN estiver ativado.
                 onApprove={onApprove}
                 onError={onError}
                 onCancel={onCancel}
                 createOrder={async (data, actions) => {
-                  /*
-                    Fazer uma request para registrar o create order e retornar um 
-                    id único de pagamento para utilizar como invoice_id, referencia etc...
-                  */
-
                   try {
-                    const result = createOrder && (await createOrder(data, actions))
+                    const orderInfo = await createOrder(data, actions)
 
-                    if (createOrder && !result) {
+                    if (!orderInfo) {
                       throw new Error('it was not possible to create the order.')
                     }
 
-                    const info = result || orderInfo
-
                     const purchase_units = [
                       {
-                        /*
-                          reference_id: ...
-                            A reference_id não precisa ser estática, ela pode ser gerada dinamicamente para cada pagamento.
-                            A reference_id é um campo opcional que você pode usar para identificar a transação.
-                            Se você precisar associar o pagamento a um pedido, por exemplo, você pode gerar uma reference_id única 
-                            para cada pedido. Isso pode ser útil para fins de rastreamento e reconciliação.
-                          */
-                        /*
-                          invoice_id: ...
-                            Um identificador exclusivo para a transação, que pode ser usado para rastrear o pagamento em seus registros.
-  
-                          custom_id: ...
-                            Um identificador exclusivo que você pode usar para associar a transação a informações adicionais em seus registros.
-                        
-                          soft_descriptor: ...
-                            Uma descrição curta que aparece na fatura do comprador para identificar a fonte do pagamento.
-                          */
-                        description: info.product.description,
+                        description: orderInfo.product.description,
                         amount: {
-                          value: info.product.price,
-                          currency_code: info.currency,
+                          value: orderInfo.product.price,
+                          currency_code: orderInfo.currency,
                         },
-                        custom_id: info.custom_id,
-                        reference_id: info.reference_id,
-                        invoice_id: info.invoice_id,
-                        soft_descriptor: info.soft_descriptor,
+                        custom_id: orderInfo.custom_id,
+                        reference_id: orderInfo.reference_id,
+                        invoice_id: orderInfo.invoice_id,
+                        soft_descriptor: orderInfo.soft_descriptor,
                       },
                     ]
 
@@ -96,7 +69,12 @@ export default function PaypalButton({
                 }}
               />
             )}
-            {/* TODO: check if button is disabled and do something... */}
+            {/* 
+              TODO: 
+              A better way to do this is, instead of using an overlay,
+              use a button holding the paypal button container and 
+              leaving it with opacity: 0 
+            */}
             {text && (
               <S.PaypalButtonOverlay disabled={disabled}>{text}</S.PaypalButtonOverlay>
             )}
