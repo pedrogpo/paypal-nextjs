@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Checkout = styled.div`
-  background: rgba(40, 40, 40);
+  background: #0e0f12;
 
   padding: 4rem;
 
@@ -10,4 +10,6 @@ export const Checkout = styled.div`
   align-items: center;
 
   color: white;
+
+  height: 100vh;
 `

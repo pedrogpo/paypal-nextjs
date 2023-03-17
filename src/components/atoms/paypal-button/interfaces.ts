@@ -28,8 +28,6 @@ export interface IPaypalButton {
 
   disabled?: boolean | undefined
 
-  orderInfo: IPaypalButtonOrderInfo
-
   onApprove?:
     | ((data: OnApproveData, actions: OnApproveActions) => Promise<void>)
     | undefined
@@ -37,7 +35,7 @@ export interface IPaypalButton {
   onCancel?:
     | ((data: Record<string, unknown>, actions: OnCancelledActions) => void)
     | undefined
-  createOrder?: (
+  createOrder: (
     data: CreateOrderData,
     actions: CreateOrderActions
   ) => Promise<IPaypalButtonOrderInfo | undefined>

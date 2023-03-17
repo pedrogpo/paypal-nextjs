@@ -1,5 +1,6 @@
-import { NextPage } from 'next'
+import '~/styles/global.css'
 
+import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import React, { ReactNode } from 'react'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
@@ -8,7 +9,7 @@ function App({
   Component,
   pageProps,
 }: AppProps & { Component: NextPage & { Layout?: ReactNode } }) {
-  // Para setar o client_id
+  // Need to set the client_id in .env
   // .env => SANDBOX_PAYPAL_CLIENT_ID=CLIENT_ID
   // .env => PRODUCTION_PAYPAL_CLIENT_ID=>CLIENT_ID
 
