@@ -20,6 +20,7 @@ export interface IPaypalButtonOrderInfo {
   reference_id?: string
   invoice_id?: string
   soft_descriptor?: string
+  product: IProduct
 }
 
 export interface IPaypalButton {
@@ -27,9 +28,7 @@ export interface IPaypalButton {
 
   disabled?: boolean | undefined
 
-  orderInfo?: IPaypalButtonOrderInfo
-
-  product: IProduct
+  orderInfo: IPaypalButtonOrderInfo
 
   onApprove?:
     | ((data: OnApproveData, actions: OnApproveActions) => Promise<void>)
@@ -38,5 +37,8 @@ export interface IPaypalButton {
   onCancel?:
     | ((data: Record<string, unknown>, actions: OnCancelledActions) => void)
     | undefined
-  createOrder?: (data: CreateOrderData, actions: CreateOrderActions) => Promise<Boolean>
+  createOrder?: (
+    data: CreateOrderData,
+    actions: CreateOrderActions
+  ) => Promise<IPaypalButtonOrderInfo | undefined>
 }
