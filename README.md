@@ -9,7 +9,7 @@ This component is built with Next.JS and Typescript.
 - Run npm/yarn install to install the dependencies
 - Set the following environment variables in the .env file:
 
-```ts
+```
 # Sandbox
 SANDBOX_PAYPAL_CLIENT_ID=your_sandbox_client_id_here
 # Production
@@ -62,7 +62,7 @@ export default function Checkout() {
 
 | Name | Type | Description |
 |------|------|-------------|
-|`disabled`|`boolean | undefined`| Whether the button should be disabled. |
+|`disabled`|`boolean \| undefined`| Whether the button should be disabled. |
 |`onApprove`|`((data: OnApproveData, actions: OnApproveActions) => Promise<void>) | undefined`| A function that is called when the buyer approves the transaction. |
 |`onError`|`((err: Record<string, unknown>) => void) | undefined`| A function that is called when there is an error. |
 |`onCancel`|`((data: Record<string, unknown>, actions: OnCancelledActions) => void) | undefined`| A function that is called when the buyer cancels the transaction. |
