@@ -5,12 +5,18 @@ export default function Checkout() {
   return (
     <S.Checkout>
       <PaypalButton
-        text="Comprar"
+        style={{
+          text: 'Comprar',
+        }}
         product={{
           name: 'Teste',
-          price: '10.00',
+          price: '15.00',
           id: 1,
           description: 'Teste',
+        }}
+        orderInfo={{}}
+        createOrder={(data, actions) => {
+          return Promise.resolve(false)
         }}
       />
     </S.Checkout>
