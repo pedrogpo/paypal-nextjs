@@ -7,7 +7,7 @@ export default function Checkout() {
     <S.Checkout>
       <PaypalButton
         style={{
-          text: 'Comprar',
+          text: 'Purchase',
           loadingComponent: <Loader />,
         }}
         createOrder={(data, actions) => {
